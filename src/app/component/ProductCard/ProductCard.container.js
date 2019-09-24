@@ -12,14 +12,9 @@
 import { connect } from 'react-redux';
 import { PureComponent } from 'react';
 import { ProductType, FilterType } from 'Type/ProductList';
-import { CartDispatcher } from 'Store/Cart';
 import { getVariantsIndexes } from 'Util/Product';
 import { convertKeyValueObjectToQueryString } from 'Util/Url';
 import ProductCard from './ProductCard.component';
-
-export const mapDispatchToProps = dispatch => ({
-    addProduct: options => CartDispatcher.addProductToCart(dispatch, options)
-});
 
 export class ProductCardContainer extends PureComponent {
     static propTypes = {
@@ -135,4 +130,4 @@ export class ProductCardContainer extends PureComponent {
 }
 
 
-export default connect(null, mapDispatchToProps)(ProductCardContainer);
+export default connect()(ProductCardContainer);
