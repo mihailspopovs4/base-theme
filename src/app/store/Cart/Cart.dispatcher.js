@@ -88,7 +88,11 @@ export class CartDispatcher {
                 productToAdd, !isSignedIn() && this._getGuestQuoteId()
             )).then(
                 ({ saveCartItem: { cartData } }) => this._updateCartData(cartData, dispatch),
-                error => dispatch(showNotification('error', error[0].message))
+                (error) => {
+                    dispatch(showNotification('error', error[0].message));
+                    // Reject Promise, otherwise following .then in chain are treating it as success
+                    return Promise.reject(error);
+                }
             );
         }
 

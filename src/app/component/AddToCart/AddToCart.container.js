@@ -120,7 +120,9 @@ export class AddToCartContainer extends PureComponent {
         return addProduct({
             product: productToAdd,
             quantity
-        }).then(() => this._afterAdded());
+        })
+            .then(() => this._afterAdded())
+            .finally(() => this.setState({ isLoading: false }));
     }
 
     _afterAdded() {
@@ -143,8 +145,6 @@ export class AddToCartContainer extends PureComponent {
         if (removeWishlistItem || (productToBeRemovedAfterAdd === sku && wishlistItems[id])) {
             removeProductFromWishlist({ product: wishlistItems[id], noMessages: true });
         }
-
-        this.setState({ isLoading: false });
     }
 
     render() {
