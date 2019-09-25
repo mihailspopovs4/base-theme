@@ -48,9 +48,8 @@ export class CartItemContainer extends PureComponent {
 
         if (newQuantity) {
             this.setState({ isLoading: true });
-            addProduct({ product, quantity: newQuantity }).then(
-                () => this.setState({ isLoading: false })
-            );
+            addProduct({ product, quantity: newQuantity })
+                .finally(() => this.setState({ isLoading: false }));
         }
     }
 
