@@ -122,6 +122,8 @@ export class AddToCartContainer extends PureComponent {
             quantity
         })
             .then(() => this._afterAdded())
+            // Catch error to prevent error message in console
+            .catch(() => {})
             .finally(() => this.setState({ isLoading: false }));
     }
 

@@ -49,6 +49,8 @@ export class CartItemContainer extends PureComponent {
         if (newQuantity) {
             this.setState({ isLoading: true });
             addProduct({ product, quantity: newQuantity })
+                // Catch error to prevent error message in console
+                .catch(() => {})
                 .finally(() => this.setState({ isLoading: false }));
         }
     }
