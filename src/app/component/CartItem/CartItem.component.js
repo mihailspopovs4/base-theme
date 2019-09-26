@@ -134,7 +134,7 @@ export default class CartItem extends PureComponent {
             handleRemoveItem,
             handleQtyChange,
             // Quantity is updated in UI first and only then we get answer from BE
-            // In case we exceed min/max quantity we need to recreate Field component to synchronize value between props and Field's state
+            // In case we exceed min/max quantity we need to recreate Field component to set Field's state equal to props
             quantityKey
         } = this.props;
 
