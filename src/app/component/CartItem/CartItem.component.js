@@ -38,7 +38,8 @@ export default class CartItem extends PureComponent {
             }),
             PropTypes.string
         ]).isRequired,
-        thumbnail: PropTypes.string.isRequired
+        thumbnail: PropTypes.string.isRequired,
+        quantityKey: PropTypes.string.isRequired
     };
 
     static defaultProps = {
@@ -131,7 +132,10 @@ export default class CartItem extends PureComponent {
             isLikeTable,
             product: { quantity },
             handleRemoveItem,
-            handleQtyChange
+            handleQtyChange,
+            // Quantity is updated in UI first and only then we get answer from BE
+            // In case we exceed min/max quantity we need to recreate Field component to synchronize value between props and Field's state
+            quantityKey
         } = this.props;
 
         return (
@@ -154,6 +158,7 @@ export default class CartItem extends PureComponent {
                   id="item_qty"
                   name="item_qty"
                   type="number"
+                  key={ quantityKey }
                   min={ 1 }
                   mix={ { block: 'CartItem', elem: 'Qty' } }
                   value={ quantity }

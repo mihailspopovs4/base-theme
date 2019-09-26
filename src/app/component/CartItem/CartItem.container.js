@@ -30,7 +30,7 @@ export class CartItemContainer extends PureComponent {
         removeProduct: PropTypes.func.isRequired
     };
 
-    state = { isLoading: false };
+    state = { isLoading: false, quantityKey: '' };
 
     containerFunctions = {
         handleQtyChange: this.handleQtyChange.bind(this),
@@ -49,9 +49,12 @@ export class CartItemContainer extends PureComponent {
         if (newQuantity) {
             this.setState({ isLoading: true });
             addProduct({ product, quantity: newQuantity })
-                // Catch error to prevent error message in console
-                .catch(() => {})
-                .finally(() => this.setState({ isLoading: false }));
+                .then(() => this.setState({ isLoading: false }))
+                .catch(() => this.setState({
+                    isLoading: false,
+                    // Random key is generated to recreate Field component
+                    quantityKey: `quantity_${ new Date().getTime() }`
+                }));
         }
     }
 
